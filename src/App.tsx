@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import { Message } from "./Message"
+import {v1} from "uuid";
+
 import './App.css';
 
 function App() {
+
+
+  // Ishodnye dannye v useState
+
+    let [messages, setMessages] = useState([
+        { id: v1(), text: "Hello" },
+        { id: v1(), text: "How are you?" },
+        { id: v1(), text: "I am fine" },
+        { id: v1(), text: "Schiki-Miki" },
+    ])
+
+    function addMessage(value:string) {
+        let newMessage = {id:v1(), text: value};
+        let newMessages = [newMessage,...messages];
+        setMessages(newMessages)
+    }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Message messages ={messages}
+                 addMessage={addMessage}
+        />
+
+      </div>
   );
 }
 
